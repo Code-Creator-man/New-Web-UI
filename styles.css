@@ -1,0 +1,104 @@
+body {
+    font-family: 'San Francisco', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+main {
+    padding: 20px;
+}
+
+#forum {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#forum h2 {
+    text-align: center;
+    font-size: 2em;
+}
+
+#posts {
+    margin-top: 20px;
+}
+
+.post {
+    background-color: #1f1f1f;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+#postForm {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#postContent {
+    width: 100%;
+    height: 50px; /* Decreased height */
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#userAccount {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#userAccount h2 {
+    font-size: 1.5em;
+    color: #ff69b4; /* Pink color for a modern touch */
+}
+
+#rainbowImage {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
