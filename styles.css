@@ -4,12 +4,16 @@ body {
     color: #ffffff;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
     background-color: #1f1f1f;
     padding: 20px;
     text-align: center;
+    border-bottom: 2px solid #ccc;
 }
 
 header h1 {
@@ -19,11 +23,15 @@ header h1 {
 
 nav ul {
     list-style: none;
-    padding: 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Added for responsiveness */
 }
 
 nav ul li {
-    display: inline;
     margin: 0 15px;
 }
 
@@ -35,11 +43,16 @@ nav ul li a {
 
 main {
     padding: 20px;
+    flex: 1;
 }
 
 #forum {
     max-width: 800px;
     margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 #forum h2 {
@@ -65,11 +78,12 @@ main {
 
 #postContent {
     width: 100%;
-    height: 50px; /* Decreased height */
+    height: 50px;
     padding: 10px;
     border-radius: 5px;
     border: none;
     margin-bottom: 10px;
+    box-sizing: border-box; /* Added for responsiveness */
 }
 
 button {
@@ -89,11 +103,15 @@ button:hover {
 #userAccount {
     text-align: center;
     margin-top: 40px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 #userAccount h2 {
     font-size: 1.5em;
-    color: #ff69b4; /* Pink color for a modern touch */
+    color: #006400; /* Changed color to dark green */
 }
 
 #rainbowImage {
@@ -101,4 +119,107 @@ button:hover {
     max-width: 400px;
     margin-top: 20px;
     border-radius: 10px;
+    height: auto; /* Added for responsiveness */
 }
+
+footer {
+    background-color: #1f1f1f;
+    padding: 20px;
+    text-align: center;
+    border-top: 2px solid #ccc;
+    margin-top: 20px;
+}
+
+#contacts {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#contacts h3 {
+    font-size: 1.5em;
+    color: #006400; /* Changed color to dark green */
+}
+
+#contacts ul {
+    list-style: none;
+    padding: 0;
+}
+
+#contacts ul li {
+    margin: 10px 0;
+}
+
+#contacts ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+#contacts ul li a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+
+    nav ul li {
+        margin: 5px 10px;
+    }
+
+    nav ul li a {
+        font-size: 1em;
+    }
+
+    #forum h2 {
+        font-size: 1.5em;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+
+    #userAccount h2 {
+        font-size: 1.2em;
+    }
+
+    #contacts h3 {
+        font-size: 1.2em;
+    }
+
+    #contacts ul li a {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    nav ul li a {
+        font-size: 0.9em;
+    }
+
+    #forum {
+        padding: 10px;
+    }
+
+    #forum h2 {
+        font-size: 1.2em;
+    }
+
+    button {
+        padding: 6px 12px;
+    }}
