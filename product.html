@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TITAN UC Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" type="png" href="assets/Tux.png"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header class="sticky top-0 z-50 bg-white shadow-md fade-in-down transition-shadow duration-300">
+    <nav blur>
+      <div class="logo-section reduce">
+        <img src="assets/Tux.png" alt="">
+        <h2><a href="index.html">TITAN_PUBGM</a></h2>
+      </div>
+      <div class="link-section">
+        <b><a class="gray wht-hover hideOnMobile" href="index.html">Home</a></b>
+        <b><a class="gray wht-hover hideOnMobile" href="product.html">Products</a></b>
+        <b><a class="gray wht-hover hideOnMobile" href="contact.html">Channel</a></b>
+        <b><a class="gray wht-hover hideOnMobile" href="about.html">About</a></b>
+        <b><a class="gray wht-hover" onclick="showSidebar()" href="#"><img class="hideOn430" src="assets/menu.png" alt=""></a></b>
+      </div>
+      <div class="sidebar-section">
+        <b><a onclick="hideSidebar()" href="#"><img src="assets/close.png" alt=""></a></b>
+        <b class="background"><a class="gray wht-hover" href="index.html">Home</a></b>
+        <b class="background"><a class="gray wht-hover" href="product.html">Products</a></b>
+        <b class="background"><a class="gray wht-hover" href="contact.html">Channel</a></b>
+        <b class="background"><a class="gray wht-hover" href="about.html">About</a></b>
+      </div>
+    </nav>
+  </header>
+  <!-- Hero section -->
+  <div class="back-image-p bg-cover bg-center h-screen">
+
+  </div>
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</body>
+</html>

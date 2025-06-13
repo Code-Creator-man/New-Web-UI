@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0070f3" />
+    <title>TITAN UC</title>
+    <script src="/js/tailwind-3.4.16.js"></script>
+    <script src="js/tailwind.config.js"></script>
+    <link rel="stylesheet" href="css/fontawesome.css" />
+    <link rel="icon" type="png" href="assets/Tux.png" />
+
+    <style type="text/tailwindcss">
+      @font-face {
+        font-family: "Inter";
+        src: url("../fonts/inter.ttf");
+      }
+
+      @layer base {
+        html {
+          scroll-behavior: smooth;
+        }
+
+        body {
+          @apply antialiased;
+        }
+      }
+
+      @layer components {
+        .container {
+          @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+        }
+      }
+
+      @layer utilities {
+        .transition-all {
+          transition-property: all;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 300ms;
+        }
+
+        .transition-transform {
+          transition-property: transform;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 300ms;
+        }
+
+        .transition-colors {
+          transition-property: background-color, border-color, color, fill,
+            stroke, opacity, box-shadow, transform;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 300ms;
+        }
+      }
+
+      @keyframes morph {
+        0% {
+          border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        50% {
+          border-radius: 30% 70% 70% 40% / 50% 60% 30% 60%;
+        }
+        100% {
+          border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .animate-morph {
+        animation: morph 8s ease-in-out infinite;
+      }
+
+      .animate-blink {
+        animation: blink 1s step-end infinite;
+      }
+
+      .opacity-0 {
+        opacity: 0;
+      }
+
+      .translate-y-4 {
+        transform: translateY(1rem);
+      }
+
+      .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      section {
+        transition-property: opacity, transform;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 500ms;
+      }
+
+      .bg-image {
+        background-image: url(assets/home.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .bg-image-uc-pack {
+        background-image: url(assets/load.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .bg-image-skins {
+        background-image: url(assets/banner.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .bg-image-about {
+        background-image: url(assets/about.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .bg-image-contact {
+        background-image: url(assets/contact.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+
+  <body
+    class="font-sans text-gray-900 dark:text-white bg-white dark:bg-dark-background transition-colors duration-300"
+  >
+    <!-- Dark mode -->
+    <div
+      class="fixed inset-0 -z-10 opacity-0 dark:opacity-100 transition-opacity duration-500 pointer-events-none"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10"
+      ></div>
+    </div>
+
+    <!-- Header -->
+    <header
+      class="fixed w-full top-0 z-50 bg-white/80 dark:bg-dark-background/80 backdrop-blur-sm shadow-sm transition-all duration-300"
+    >
+      <div class="container mx-auto px-4">
+        <nav class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <span class="text-xl font-extrabold">TITAN_PUGM</span>
+            <span class="text-primary text-3xl ml-1">*</span>
+          </div>
+          <ul class="hidden md:flex space-x-8">
+            <li>
+              <a href="#home" target="_blank" rel="noopener noreferrer"
+                class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Home</a>
+            </li>
+            <li>
+              <a href="#products" target="_blank" rel="noopener noreferrer"
+                class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Products</a>
+            </li>
+            <li>
+              <a href="#about" target="_blank" rel="noopener noreferrer"
+                class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">About</a>
+            </li>
+            <li>
+              <a href="#contact" target="_blank" rel="noopener noreferrer"
+                class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Contact</a>
+            </li>
+          </ul>
+          <div class="flex items-center space-x-4">
+            <button id="themeToggle">
+              <i class="fa-solid fa-moon text-gray-600 dark:text-gray-400"></i>
+            </button>
+            <!-- Cart Icon Button -->
+            <button id="cartToggle" class="relative">
+              <i
+                class="fa-solid fa-cart-shopping text-gray-600 dark:text-gray-400 text-xl"
+              ></i>
+              <span
+                id="cartCount"
+                class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full px-1 hidden"
+                >1</span
+              >
+            </button>
+            <button class="md:hidden p-2" id="menuToggle">
+              <div class="w-6 h-5 flex flex-col justify-between">
+                <span
+                  class="w-full h-0.5 bg-gray-600 dark:bg-gray-400 transition-all"
+                ></span>
+                <span
+                  class="w-full h-0.5 bg-gray-600 dark:bg-gray-400 transition-all"
+                ></span>
+                <span
+                  class="w-full h-0.5 bg-gray-600 dark:bg-gray-400 transition-all"
+                ></span>
+              </div>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobileMenu"
+      class="fixed inset-0 bg-white dark:bg-dark-background z-50 transform translate-x-full transition-transform duration-300 md:hidden"
+    >
+      <div class="container mx-auto px-4 h-full flex flex-col">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <span class="text-xl font-extrabold">TITAN UC</span>
+            <span class="text-primary text-3xl ml-1">•</span>
+          </div>
+          <button id="closeMenu" class="p-2">
+            <i
+              class="fa-solid fa-square-xmark text-gray-600 dark:text-gray-400 text-2xl"
+            ></i>
+          </button>
+        </div>
+        <ul class="flex-1 flex flex-col justify-center items-center space-y-8">
+          <li>
+            <a href="#home" target="_blank" rel="noopener noreferrer"
+              class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Home</a>
+          </li>
+          <li>
+            <a href="#products" target="_blank" rel="noopener noreferrer"
+              class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Products</a>
+          </li>
+          <li>
+            <a href="#about" target="_blank" rel="noopener noreferrer"
+              class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">About</a>
+          </li>
+          <li>
+            <a href="#contact" target="_blank" rel="noopener noreferrer"
+              class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <section
+      id="home"
+      class="w-full min-h-screen bg-image flex items-center pt-20 pb-16 relative overflow-hidden"
+    >
+      <div class="bg-dark/90 mx-auto px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            Welcome to
+            <span class="text-blue-500 mx-auto font-bold"> TITAN UC</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8">
+            Your ultimate gaming destination. Dominate the battlefield with
+            Vniverse UC! Get the best in-game currency deals and elevate your
+            gameplay. Power up, gear up, and conquer!
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <a href="#products" target="_blank" rel="noopener noreferrer"
+              class="px-8 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-blue-300/30 dark:hover:shadow-blue-500/20 shadow-blue-200/20 dark:shadow-blue-700/10"
+            >
+              Get Started
+            </a>
+            <a href="#about" target="_blank" rel="noopener noreferrer"
+              class="px-8 py-3 bg-white dark:bg-dark-background-secondary text-gray-900 dark:text-white border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-900 dark:hover:border-white transition-colors"
+              >Learn More</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="products"
+      class="py-24 bg-gray-50 dark:bg-dark-background-secondary translate-y-4 transition-all duration-500 opacity-0"
+    >
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+          Our Products
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-400 text-center mb-16">
+          Explore our wide range of in-game currency packages tailored to meet
+          your needs. Whether you're a casual player or a competitive gamer, we
+          have the perfect solution for you.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <a href="#" target="_blank" rel="noopener noreferrer"
+            class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <div
+              class="w-full h-40 bg-image-uc-pack rounded-xl flex items-center justify-center mb-6"
+            ></div>
+            <h3 class="text-xl font-bold mb-4">Affordable UC packages</h3>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer"
+            class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <div
+              class="w-full h-40 bg-image-skins rounded-xl flex items-center justify-center mb-6"
+            ></div>
+            <h3 class="text-xl font-bold mb-4">Exclusive skins and items</h3>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer"
+            class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <div
+              class="w-full h-40 bg-image-about rounded-xl flex items-center justify-center mb-6"
+            ></div>
+            <h3 class="text-xl font-bold mb-4">
+              Seasonal offers and discounts
+            </h3>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer"
+            class="bg-white dark:bg-dark-background p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          >
+            <div
+              class="w-full h-40 bg-image-contact rounded-xl flex items-center justify-center mb-6"
+            ></div>
+            <h3 class="text-xl font-bold mb-4">Reliable seller, ever!</h3>
+          </a>
+        </div>
+        <div class="mt-16 prices">
+          <h4 class="text-3xl md:text-4xl font-bold text-center mb-4">
+            Prices & discounts
+          </h4>
+          <p class="text-xl text-gray-600 dark:text-gray-400 text-center mb-16">
+            Our prices are competitive, and we offer regular discounts and promotions to help you save even more. You can add your chosen items to the card section!
+          </p>
+          <form id="ucForm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+              <!-- 60 UC -->
+              <label class="block cursor-pointer">
+                <input type="checkbox" name="ucOption" value="60 UC" class="peer sr-only" />
+                <div class="bg-white dark:bg-dark-background rounded-xl shadow-md p-6 flex flex-col items-center border-2 border-transparent peer-checked:border-primary transition-all hover:shadow-lg">
+                  <img src="assets/60UC.png" alt="60 UC" class="w-20 h-20 mb-3 object-contain" />
+                  <div class="text-2xl font-bold mb-2">60 UC</div>
+                  <button type="button" data-uc="60 UC" class="select-packet flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition mb-2">
+                    <span class="text-lg font-bold text-primary">23 TMT</span>
+                    <span class="text-gray-400 line-through text-base"><s>25 TMT</s></span>
+                  </button>
+                  <div class="flex justify-center w-full">
+                    <span class="inline-block px-3 py-1 text-xs bg-primary/10 text-primary rounded-full ml-auto">Best for try</span>
+                  </div>
+                </div>
+              </label>
+              <!-- 325 UC -->
+              <label class="block cursor-pointer">
+                <input type="checkbox" name="ucOption" value="325 UC" class="peer sr-only" />
+                <div class="bg-white dark:bg-dark-background rounded-xl shadow-md p-6 flex flex-col items-center border-2 border-transparent peer-checked:border-primary transition-all hover:shadow-lg">
+                  <img src="assets/300!.png" alt="325 UC" class="w-20 h-20 mb-3 object-contain" />
+                  <div class="text-2xl font-bold mb-2">325 UC</div>
+                  <button type="button" data-uc="325 UC" class="select-packet flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition mb-2">
+                    <span class="text-lg font-bold text-primary">105 TMT</span>
+                    <span class="text-gray-400 line-through text-base"><s>110 TMT</s></span>
+                  </button>
+                  <div class="flex justify-center w-full">
+                    <span class="inline-block px-3 py-1 text-xs bg-primary/10 text-primary rounded-full ml-auto">Popular</span>
+                  </div>
+                </div>
+              </label>
+              <!-- 660 UC -->
+              <label class="block cursor-pointer">
+                <input type="checkbox" name="ucOption" value="660 UC" class="peer sr-only" />
+                <div class="bg-white dark:bg-dark-background rounded-xl shadow-md p-6 flex flex-col items-center border-2 border-transparent peer-checked:border-primary transition-all hover:shadow-lg">
+                  <img src="assets/600.png" alt="660 UC" class="w-20 h-20 mb-3 object-contain" />
+                  <div class="text-2xl font-bold mb-2">660 UC</div>
+                  <button type="button" data-uc="660 UC" class="select-packet flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition mb-2">
+                    <span class="text-lg font-bold text-primary">207 TMT</span>
+                    <span class="text-gray-400 line-through text-base"><s>210 TMT</s></span>
+                  </button>
+                  <div class="flex justify-center w-full">
+                    <span class="inline-block px-3 py-1 text-xs bg-primary/10 text-primary rounded-full ml-auto">Discount</span>
+                  </div>
+                </div>
+              </label>
+              <!-- 1800 UC -->
+              <label class="block cursor-pointer">
+                <input type="checkbox" name="ucOption" value="1800 UC" class="peer sr-only" />
+                <div class="bg-white dark:bg-dark-background rounded-xl shadow-md p-6 flex flex-col items-center border-2 border-transparent peer-checked:border-primary transition-all hover:shadow-lg">
+                  <img src="assets/1500.png" alt="1800 UC" class="w-20 h-20 mb-3 object-contain" />
+                  <div class="text-2xl font-bold mb-2">1800 UC</div>
+                  <button type="button" data-uc="1800 UC" class="select-packet flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition mb-2">
+                    <span class="text-lg font-bold text-primary">530 TMT</span>
+                    <span class="text-gray-400 line-through text-base"><s>600 TMT</s></span>
+                  </button>
+                  <div class="flex justify-center w-full">
+                    <span class="inline-block px-3 py-1 text-xs bg-primary/10 text-primary rounded-full">Big Pack</span>
+                  </div>
+                </div>
+              </label>
+              <!-- 3850 UC -->
+              <label class="block cursor-pointer">
+                <input type="checkbox" name="ucOption" value="3850 UC" class="peer sr-only" />
+                <div class="bg-white dark:bg-dark-background rounded-xl shadow-md p-6 flex flex-col items-center border-2 border-transparent peer-checked:border-primary transition-all hover:shadow-lg">
+                  <img src="assets/3000!.png" alt="3850 UC" class="w-20 h-20 mb-3 object-contain" />
+                  <div class="text-2xl font-bold mb-2">3850 UC</div>
+                  <button type="button" data-uc="3850 UC" class="select-packet flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition mb-2">
+                    <span class="text-lg font-bold text-primary">1020 TMT</span>
+                    <span class="text-gray-400 line-through text-base"><s>1200 TMT</s></span>
+                  </button>
+                  <div class="flex justify-center w-full">
+                    <span class="inline-block px-3 py-1 text-xs bg-primary/10 text-primary rounded-full">Pro Choice</span>
+                  </div>
+                </div>
+              </label>
+              <!-- 8100 UC -->
+              <label class="block cursor-pointer">
+                <input type="checkbox" name="ucOption" value="8100 UC" class="peer sr-only" />
+                <div class="bg-white dark:bg-dark-background rounded-xl shadow-md p-6 flex flex-col items-center border-2 border-transparent peer-checked:border-primary transition-all hover:shadow-lg">
+                  <img src="assets/6000.png" alt="8100 UC" class="w-20 h-20 mb-3 object-contain" />
+                  <div class="text-2xl font-bold mb-2">8100 UC</div>
+                  <button type="button" data-uc="8100 UC" class="select-packet flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 hover:bg-primary/20 transition mb-2">
+                    <span class="text-lg font-bold text-primary">2050 TMT</span>
+                    <span class="text-gray-400 line-through text-base"><s>2200 TMT</s></span>
+                  </button>
+                  <div class="flex justify-center w-full">
+                    <span class="inline-block px-3 py-1 text-xs bg-primary/10 text-primary rounded-full">Max Value</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+            <div class="flex flex-col items-center mt-8">
+              <button
+                type="submit"
+                class="px-8 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300"
+              >
+                Add to cart
+              </button>
+              <span
+                id="cartMessage"
+                class="mt-4 text-green-600 dark:text-green-400 font-semibold hidden"
+                >Added to cart!</span
+              >
+            </div>
+            <div class="flex justify-center mt-4">
+              <!-- <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="about"
+      class="py-24 translate-y-4 transition-all duration-500 opacity-0"
+    >
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">About</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">
+              TITAN UC - reliable UC seller.
+            </p>
+            <p class="text-gray-600 dark:text-gray-400 mb-6">
+              TITAN UC is a trusted provider of in-game currency and gaming
+              solutions. Our mission is to empower gamers worldwide by offering
+              affordable and reliable services.
+            </p>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+              Years of experience in the gaming industry. Trusted by thousands
+              of players. You can reach us by clicking the button, thet will bring you to our START channel. 🖗🖗🖗
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="https://tmstart.me/TITAN_PUBG/" target="_blank" rel="noopener noreferrer"
+                class="px-8 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-blue-300/30 dark:hover:shadow-blue-500/20 shadow-blue-200/20 dark:shadow-blue-700/10 text-center">Contact with us!</a>
+            </div>
+          </div>
+          <div class="relative">
+            <div
+              class="w-72 h-72 mx-auto bg-gradient-to-br from-primary via-secondary to-accent rounded-full relative overflow-hidden"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-primary/50 via-secondary/50 to-accent/50 rounded-full blur-2xl animate-morph"
+              ></div>
+              <img
+                src="assets/product.jpg"
+                alt="Profile Photo"
+                class="absolute inset-0 w-full h-full object-cover z-10"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="contact"
+      class="py-24 bg-gray-50 dark:bg-dark-background-secondary translate-y-4 transition-all duration-500 opacity-0"
+    >
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">
+          Contact Us
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-400 text-center mb-16">
+          Have questions or need assistance? Our support team is here to help
+          you 24/7. Reach out to us through any of the following channels˕˕˕
+        </p>
+        <div class="grid grid-cols-1 gap-3">
+          <div
+            class="col-span-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"
+          >
+            <div
+              class="bg-white dark:bg-dark-background p-6 rounded-lg shadow-lg text-center"
+            >
+              <div
+                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="fa-solid fa-envelope text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Email</h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                <a href="mailto:titan.pu3g@gmail.com" class="hover:text-primary transition-colors" style="text-decoration: none;">
+                  titan.pu3g@gmail.com
+                </a>
+              </p>
+            </div>
+            <div
+              class="bg-white dark:bg-dark-background p-6 rounded-lg shadow-lg text-center"
+            >
+              <div
+                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="fa-solid fa-phone text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Phone number</h3>
+              <p class="text-gray-600 dark:text-gray-400">+993-71-26-64-00</p>
+            </div>
+            <div
+              class="bg-white dark:bg-dark-background p-6 rounded-lg shadow-lg text-center"
+            >
+              <div
+                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="fa-solid fa-globe text-primary text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Social Media</h3>
+              <div class="flex justify-center space-x-4">
+                <a href="https://www.tiktok.com/@titan_pu3g?_t=ZN-8x8lmCVwNlu&_r=1" target="_blank" rel="noopener noreferrer"
+                  class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300"
+                >
+                  <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="https://t.me/TITAN_PU3G" target="_blank" rel="noopener noreferrer"
+                  class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300"
+                >
+                  <i class="fa-brands fa-telegram"></i>
+                </a>
+                <a href="https://www.youtube.com/@TITANPU3G" target="_blank" rel="noopener noreferrer"
+                  class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300"
+                >
+                  <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="no whatsup yet" target="_blank" rel="noopener noreferrer"
+                  class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300"
+                >
+                  <i class="fa-brands fa-whatsapp"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-white dark:bg-dark-background py-12">
+      <div class="container mx-auto px-4">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8"
+        >
+          <div class="flex items-center mb-4 md:mb-0">
+            <span class="text-xl font-extrabold">TITAN UC</span>
+            <span class="text-primary text-3xl ml-1">*</span>
+          </div>
+          <ul class="flex flex-wrap justify-center gap-6 mb-0">
+            <li>
+              <a href="#home" target="_blank" rel="noopener noreferrer"
+                class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="#products" target="_blank" rel="noopener noreferrer"
+                class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                >Products</a
+              >
+            </li>
+            <li>
+              <a href="#about" target="_blank" rel="noopener noreferrer"
+                class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="#contact" target="_blank" rel="noopener noreferrer"
+                class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                >Contact</a
+              >
+            </li>
+          </ul>
+          <div class="flex gap-4">
+            <a href="https://www.tiktok.com/@titan_pu3g?_t=ZN-8x8lmCVwNlu&_r=1" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300"
+            >
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://t.me/TITAN_PU3G" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300"
+            >
+              <i class="fa-brands fa-telegram-plane"></i>
+            </a>
+            <a href="https://www.youtube.com/@TITANPU3G" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300"
+            >
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer"
+              class="w-10 h-10 bg-gray-100 dark:bg-dark-background-secondary rounded-full flex items-center justify-center text-gray-600 hover:text-primary dark:hover:text-primary dark:text-gray-400 transition-all duration-300"
+            >
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+        <div class="text-center text-gray-600 dark:text-gray-400 text-sm">
+          <p>&copy; 2025 TITAN UC. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Cart button-->
+    <div
+      id="cartModal"
+      class="fixed inset-0 bg-black/40 z-50 flex items-center justify-center hidden"
+    >
+      <div
+        class="bg-white dark:bg-dark-background rounded-lg shadow-lg p-6 w-80 relative"
+      >
+        <button
+          id="closeCart"
+          class="absolute top-2 right-2 text-gray-500 hover:text-primary"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h3 class="text-xl font-bold mb-4">Your Cart</h3>
+        <div id="cartItems" class="mb-4 text-gray-700 dark:text-gray-200">
+          <span class="text-gray-400">Cart is empty.</span>
+        </div>
+        
+        <div id="paySection" class="mt-6 hidden">
+          <button
+            id="payButton"
+            class="w-full px-6 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300"
+          >
+            Pay
+          </button>
+          <p class="text-xs text-gray-500 mt-2 text-center">
+            You will be redirected to TITAN's email to complete the payment.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("ucForm");
+        const cartMessage = document.getElementById("cartMessage");
+        const cartToggle = document.getElementById("cartToggle");
+        const cartModal = document.getElementById("cartModal");
+        const closeCart = document.getElementById("closeCart");
+        const cartItems = document.getElementById("cartItems");
+        const cartCount = document.getElementById("cartCount");
+        const paySection = document.getElementById("paySection");
+        const payButton = document.getElementById("payButton");
+        const addToCartBtn = form.querySelector('button[type="submit"]');
+        // Sepet: [{name: "60 UC", qty: 2}, ...]
+        let cart = [];
+
+        // Her ürün için kaç adet seçildiğini tutmak için bir nesne
+        const selectedCounts = {};
+
+        // select-packet butonu sadece checkbox'ı toggle eder ve adedi artırır
+        document.querySelectorAll('.select-packet').forEach(btn => {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const input = this.closest('label').querySelector('input[type="checkbox"]');
+            const value = input.value;
+            // Adet artır
+            selectedCounts[value] = (selectedCounts[value] || 0) + 1;
+            input.checked = true;
+            updateAddToCartState();
+            updateCheckboxBadges();
+          });
+        });
+
+        // Checkbox'a manuel tıklanırsa adedi 1 yap veya kaldır
+        form.querySelectorAll('input[name="ucOption"]').forEach(input => {
+          input.addEventListener('change', function () {
+            if (input.checked) {
+              selectedCounts[input.value] = selectedCounts[input.value] || 1;
+            } else {
+              delete selectedCounts[input.value];
+            }
+            updateAddToCartState();
+            updateCheckboxBadges();
+          });
+        });
+
+        // Add to cart butonuna basınca seçili ürünleri sepete ekle
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            // Seçili ürünleri ve miktarlarını sepete ekle
+            Object.entries(selectedCounts).forEach(([name, qty]) => {
+              const existing = cart.find(item => item.name === name);
+              if (existing) {
+                existing.qty += qty;
+              } else {
+                cart.push({ name, qty });
+              }
+            });
+            // Checkbox'ları ve seçili adetleri temizle
+            form.querySelectorAll('input[name="ucOption"]').forEach(input => {
+              input.checked = false;
+            });
+            for (const key in selectedCounts) delete selectedCounts[key];
+            updateAddToCartState();
+            updateCheckboxBadges();
+            cartMessage.classList.remove("hidden");
+            updateCartCount();
+            setTimeout(() => cartMessage.classList.add("hidden"), 2000);
+          });
+        }
+
+        // Add to cart butonunu aktif/pasif yap
+        function updateAddToCartState() {
+          const hasSelection = Object.keys(selectedCounts).length > 0;
+          addToCartBtn.disabled = !hasSelection;
+          if (hasSelection) {
+            addToCartBtn.classList.remove("opacity-50", "cursor-not-allowed");
+          } else {
+            addToCartBtn.classList.add("opacity-50", "cursor-not-allowed");
+          }
+        }
+
+        // Checkbox'ların üstüne adet badge'i ekle
+        function updateCheckboxBadges() {
+          form.querySelectorAll('label').forEach(label => {
+            let badge = label.querySelector('.uc-badge');
+            if (!badge) {
+              badge = document.createElement('span');
+              badge.className = 'uc-badge absolute top-2 right-2 bg-primary text-white text-xs rounded-full px-2 py-0.5 hidden';
+              label.style.position = 'relative';
+              label.appendChild(badge);
+            }
+            const input = label.querySelector('input[type="checkbox"]');
+            const value = input.value;
+            if (selectedCounts[value] > 1) {
+              badge.textContent = 'x' + selectedCounts[value];
+              badge.classList.remove('hidden');
+            } else {
+              badge.classList.add('hidden');
+            }
+          });
+        }
+
+        // Sayfa ilk açıldığında butonu disable yap
+        updateAddToCartState();
+
+        function updateCartCount() {
+          const total = cart.reduce((sum, item) => sum + item.qty, 0);
+          cartCount.textContent = total;
+          if (total > 0) {
+            cartCount.classList.remove("hidden");
+          } else {
+            cartCount.classList.add("hidden");
+          }
+        }
+
+        if (cartToggle && cartModal && cartItems) {
+          cartToggle.addEventListener("click", function () {
+            cartModal.classList.remove("hidden");
+            renderCartItems();
+          });
+        }
+
+        function renderCartItems() {
+          if (cart.length > 0) {
+            cartItems.innerHTML =
+              '<ul class="list-disc list-inside space-y-2">' +
+              cart.map((item, idx) =>
+                `<li class="flex justify-between items-center">
+                  <span>${item.name} <span class="text-xs text-gray-500">x${item.qty}</span></span>
+                  <button class="remove-cart-item text-red-500 ml-2" data-idx="${idx}" title="Kaldır">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </li>`
+              ).join("") +
+              "</ul>";
+            paySection.classList.remove("hidden");
+          } else {
+            cartItems.innerHTML =
+              '<span class="text-gray-400">Cart is empty.</span>';
+            paySection.classList.add("hidden");
+          }
+          // Kaldırma butonlarına event ekle
+          cartItems.querySelectorAll('.remove-cart-item').forEach(btn => {
+            btn.addEventListener('click', function () {
+              const idx = parseInt(this.getAttribute('data-idx'));
+              cart.splice(idx, 1);
+              updateCartCount();
+              renderCartItems();
+            });
+          });
+          updateCartCount();
+        }
+
+        if (closeCart && cartModal) {
+          closeCart.addEventListener("click", function () {
+            cartModal.classList.add("hidden");
+          });
+        }
+
+        if (cartModal) {
+          cartModal.addEventListener("click", function (e) {
+            if (e.target === cartModal) {
+              cartModal.classList.add("hidden");
+            }
+          });
+        }
+
+        if (payButton) {
+          payButton.addEventListener("click", function () {
+            if (cart.length > 0) {
+              const subject = encodeURIComponent("UC Toleg bolumi");
+              const body = encodeURIComponent(
+                `Salam gowymy yagdaylarynyz,\n\nMen Asakda gorkezilen mukdarda UC almak ucin size yazyaryn:\n\n` +
+                cart.map(item => `${item.name} x${item.qty}`).join(" we ") +
+                `\n\nHayys edyan mana toleg ucin card ID'nizi yada basga toleg maglumatlarynyzy ugradyn.\n\nSag bolun!`
+              );
+              const mailtoUrl = `mailto:titan.pu3g@gmail.com?subject=${subject}&body=${body}`;
+              window.open(mailtoUrl, '_blank');
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
