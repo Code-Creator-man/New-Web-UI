@@ -143,7 +143,7 @@
   <body
     class="font-sans text-gray-900 dark:text-white bg-white dark:bg-dark-background transition-colors duration-300"
   >
-    <!-- Dark mode -->
+    
     <div
       class="fixed inset-0 -z-10 opacity-0 dark:opacity-100 transition-opacity duration-500 pointer-events-none"
     >
@@ -213,7 +213,7 @@
       </div>
     </header>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile  -->
     <div
       id="mobileMenu"
       class="fixed inset-0 bg-white dark:bg-dark-background z-50 transform translate-x-full transition-transform duration-300 md:hidden"
@@ -685,19 +685,15 @@
         const paySection = document.getElementById("paySection");
         const payButton = document.getElementById("payButton");
         const addToCartBtn = form.querySelector('button[type="submit"]');
-        // Sepet: [{name: "60 UC", qty: 2}, ...]
         let cart = [];
 
-        // Her ürün için kaç adet seçildiğini tutmak için bir nesne
         const selectedCounts = {};
-
-        // select-packet butonu sadece checkbox'ı toggle eder ve adedi artırır
+      
         document.querySelectorAll('.select-packet').forEach(btn => {
           btn.addEventListener('click', function (e) {
             e.preventDefault();
             const input = this.closest('label').querySelector('input[type="checkbox"]');
             const value = input.value;
-            // Adet artır
             selectedCounts[value] = (selectedCounts[value] || 0) + 1;
             input.checked = true;
             updateAddToCartState();
@@ -705,7 +701,6 @@
           });
         });
 
-        // Checkbox'a manuel tıklanırsa adedi 1 yap veya kaldır
         form.querySelectorAll('input[name="ucOption"]').forEach(input => {
           input.addEventListener('change', function () {
             if (input.checked) {
@@ -718,7 +713,7 @@
           });
         });
 
-        // Add to cart butonuna basınca seçili ürünleri sepete ekle
+      
         if (form) {
           form.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -731,7 +726,7 @@
                 cart.push({ name, qty });
               }
             });
-            // Checkbox'ları ve seçili adetleri temizle
+    
             form.querySelectorAll('input[name="ucOption"]').forEach(input => {
               input.checked = false;
             });
@@ -744,7 +739,7 @@
           });
         }
 
-        // Add to cart butonunu aktif/pasif yap
+        
         function updateAddToCartState() {
           const hasSelection = Object.keys(selectedCounts).length > 0;
           addToCartBtn.disabled = !hasSelection;
@@ -755,7 +750,7 @@
           }
         }
 
-        // Checkbox'ların üstüne adet badge'i ekle
+  
         function updateCheckboxBadges() {
           form.querySelectorAll('label').forEach(label => {
             let badge = label.querySelector('.uc-badge');
@@ -776,7 +771,6 @@
           });
         }
 
-        // Sayfa ilk açıldığında butonu disable yap
         updateAddToCartState();
 
         function updateCartCount() {
@@ -815,7 +809,7 @@
               '<span class="text-gray-400">Cart is empty.</span>';
             paySection.classList.add("hidden");
           }
-          // Kaldırma butonlarına event ekle
+          
           cartItems.querySelectorAll('.remove-cart-item').forEach(btn => {
             btn.addEventListener('click', function () {
               const idx = parseInt(this.getAttribute('data-idx'));
